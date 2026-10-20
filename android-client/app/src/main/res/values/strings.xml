@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ViberAgent</string>
+    <string name="accessibility_description">ViberAgent publishes,changes and deletes messages</string>
 </resources>
