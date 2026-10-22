@@ -1,6 +1,9 @@
-package com.viberposter.agent
+package com.viberposter.agent;
+
+
 
 final class Ui {
+    
     static final String TAG = "ViberAgent";
 
     private final AccessibilityService service;
@@ -9,7 +12,7 @@ final class Ui {
         this.service = service;
     }
 
-    List<AccessibilityNodeInfo> findAll (String viewId){
+    List <AccessibilityNodeInfo> findAll (String viewId){
         List<AccessibilityNodeInfo> result = new ArrayList<>();
         List<AccessibilityWindowInfo> windows = service.getWindows();
         for(AccessibilityWindowInfo w : windows) {
@@ -55,7 +58,7 @@ final class Ui {
 
     static String descOf (AccessibilityNodeInfo n) {
         CharSequence d = n.getContentDescription();
-        return d == null ? : d.toString.trim();
+        return d == null ? "": d.toString.trim();
     }
 
     static Predicate<AccessibilityNodeInfo> hasText (String text) {
@@ -75,7 +78,7 @@ final class Ui {
         if(cur !=null && cur.PerformAction(AccessibilityNodeInfo.ACTION_CLICK)){
             return true;
         }
-        returne gesture(n, 50);
+        return gesture(n, 50);
     }
 
     boolean longClick (AccessibilityNodeInfo n) {
