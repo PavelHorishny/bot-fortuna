@@ -24,13 +24,13 @@ final class ViberIds {
 
     static final String BANNER_GOT_IT = id("gotIt");
     static final String BANNER_NOT_NOW = id("secondary_button");
-    static final TYPING_TIP_CLOSE = id("hide_is_typing_ftue_close_click_area");
+    static final String TYPING_TIP_CLOSE = id("hide_is_typing_ftue_close_click_area");
 
     static final String DESC_SEND = "Отправить";
     static final String DESC_EDIT = "Изменить";
     static final String MENU_EDIT = "Изменить";
     static final String MENU_DELETE = "Удалить";
-    static final String DELETE_EVERYEHERE = "Удалить везде";
+    static final String DELETE_EVERYWHERE = "Удалить везде";
     static final String NOT_NOW = "Не сейчас";
 
     private ViberIds() {}

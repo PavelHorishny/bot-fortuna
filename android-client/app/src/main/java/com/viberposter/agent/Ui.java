@@ -1,6 +1,19 @@
 package com.viberposter.agent;
 
+;
 
+import android.accessibilityservice.AccessibilityService;
+import android.accessibilityservice.GestureDescription;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityWindowInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 final class Ui {
     
@@ -21,10 +34,10 @@ final class Ui {
                 result.addAll(root.findAccessibilityNodeInfosByViewId(viewId));
             }
         }
-        if(windows.isEpmty()) {
+        if(windows.isEmpty()) {
             AccessibilityNodeInfo root = service.getRootInActiveWindow();
             if(root != null) {
-                result.addAll(root.findAccessibilitNodeInfosByViewId(viewId));
+                result.addAll(root.findAccessibilityNodeInfosByViewId(viewId));
             }
         }
         return result;
@@ -39,7 +52,7 @@ final class Ui {
         return null;
     }
 
-    AccessibilityNodeInfo waitFor (String view, Predicate<AccessibilityNodeInfo> match, long timeoutMs) {
+    AccessibilityNodeInfo waitFor (String viewId, Predicate<AccessibilityNodeInfo> match, long timeoutMs) {
         long end = SystemClock.uptimeMillis() + timeoutMs;
         do {
             AccessibilityNodeInfo n = find(viewId, match);
@@ -58,7 +71,7 @@ final class Ui {
 
     static String descOf (AccessibilityNodeInfo n) {
         CharSequence d = n.getContentDescription();
-        return d == null ? "": d.toString.trim();
+        return d == null ? "" : d.toString().trim();
     }
 
     static Predicate<AccessibilityNodeInfo> hasText (String text) {
@@ -71,11 +84,11 @@ final class Ui {
     }
 
     boolean click (AccessibilityNodeInfo n) {
-        Accessibility cur = n;
+        AccessibilityNodeInfo cur = n;
         while (cur != null && !cur.isClickable()) {
             cur = cur.getParent();
         }
-        if(cur !=null && cur.PerformAction(AccessibilityNodeInfo.ACTION_CLICK)){
+        if(cur !=null && cur.performAction(AccessibilityNodeInfo.ACTION_CLICK)){
             return true;
         }
         return gesture(n, 50);
@@ -106,7 +119,7 @@ final class Ui {
         p.moveTo(r.centerX(), r.centerY());
         GestureDescription g = new GestureDescription.Builder()
                 .addStroke(new GestureDescription.StrokeDescription(p,0,durationMs))
-                .build;
+                .build();
         return service.dispatchGesture(g,null,null);
     }
 
