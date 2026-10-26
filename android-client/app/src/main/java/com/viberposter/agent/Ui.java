@@ -1,7 +1,5 @@
 package com.viberposter.agent;
 
-;
-
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.GestureDescription;
 import android.graphics.Path;
